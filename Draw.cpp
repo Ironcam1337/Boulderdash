@@ -5,7 +5,7 @@ using namespace sf;
 
 void Engine::draw()
 {
-	// Rub out the last frame
+	// Clears the screen to remove the last frame
 	m_Window.clear(Color::Black);
 
 	if (HasWon) {
@@ -20,6 +20,6 @@ void Engine::draw()
 		m_Grid.draw(m_Window);
 	}
 
-	// Show everything we have just drawn
+	// Displays the updated grid
 	m_Window.display();
 }

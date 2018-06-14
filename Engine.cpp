@@ -11,7 +11,7 @@ Engine::Engine()
 	: m_Grid(15,15,64.0f,64.0f) // Set your grid size here!
 {
 	// Get the game screen resolution
-	// and creste an SFML window and View
+	// creates SFML window and View
 	Vector2f resolution;
 	resolution.x = VideoMode::getDesktopMode().width;
 	resolution.y = VideoMode::getDesktopMode().height;
@@ -31,23 +31,18 @@ Engine::Engine()
 	m_winSprite.setTexture(m_winTexture);
 	m_gameOverSprite.setTexture(m_gameOverTexture);
 
-	// Set the grid position so grid is centered
+	// Centres the grid
 	sf::Vector2f gridPosition(0,0);
 	gridPosition.x = 0.5f*resolution.x -m_Grid.CELL_WIDTH  * 0.5f *(float)m_Grid.GRID_SIZE_X;
 	gridPosition.y = 0.5f*resolution.y -m_Grid.CELL_HEIGHT * 0.5f *(float)m_Grid.GRID_SIZE_Y;
 	m_Grid.SetPosition(gridPosition);
 
-	// Set up the grid contents
-	// NOTE: This could be done based on a file
-	// similar to how Thomas Was Late levels were loaded!
-	
-	
+	//Loads the level
 	LoadLevel(m_currentLevel);
 }
 
 void Engine::run()
 {
-	// Timing
 	Clock clock;
 
 	while (m_Window.isOpen())

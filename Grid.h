@@ -6,8 +6,6 @@
 class GridObject;
 
 // Grid Class
-// Inherits from GameObject so we can use polymorphic calls to
-// GameObject general functions
 // Holds a 2 dimmensional array of GridObjects and passes GameObject
 // calls down to those child objects.
 class Grid : public GameObject
@@ -15,19 +13,19 @@ class Grid : public GameObject
 
 public:
 
-	// Constructor and Destructor
+	// Constructor and Destructor for the grid
 	Grid(const int _GRID_SIZE_X, 
 		const int _GRID_SIZE_Y,
 		const float _CELL_WIDTH,
 		const float _CELL_HEIGHT);
 	~Grid();
 
-	// Game Object Functions
+	// Functions for the gameobjects
 	bool input(const sf::Event& _event) override;
 	void update(const float& _dtAsSeconds) override;
 	void draw(sf::RenderWindow& _renderWindow) override;
 
-	// Grid Functions
+	// Functions for the Grid
 	GridObject* GetObject(int _x, int _y);
 	void SetObject(int _x, int _y, 
 		GridObject* _object, 

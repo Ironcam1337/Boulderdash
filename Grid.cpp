@@ -2,7 +2,7 @@
 #include "Grid.h"
 #include "GridObject.h"
 
-// Constructor
+
 // Called when the grid is created
 Grid::Grid(const int _GRID_SIZE_X, 
 	const int _GRID_SIZE_Y,
@@ -13,8 +13,7 @@ Grid::Grid(const int _GRID_SIZE_X,
 	, CELL_WIDTH(_CELL_WIDTH)
 	, CELL_HEIGHT(_CELL_HEIGHT)
 {
-	// Set up the grid array with empty spaces for each
-	// grid object
+	// Sets up the grid array with no gameobjects in it
 	m_GridArray = new GridObject**[GRID_SIZE_X];
 	for (int x = 0; x < GRID_SIZE_X; ++x)
 	{
@@ -26,11 +25,10 @@ Grid::Grid(const int _GRID_SIZE_X,
 	}
 }
 
-// Destructor
-// Called when the grid is destroyed
+
+// This deletes the current grid array
 Grid::~Grid()
 {
-	// Delete the grid array
 	for (int x = 0; x < GRID_SIZE_X; ++x)
 	{
 		for (int y = 0; y < GRID_SIZE_Y; ++y)
@@ -45,18 +43,13 @@ Grid::~Grid()
 // Input - processes events each frame sent from engine
 bool Grid::input(const sf::Event& _event)
 {
-	// We start out assuming we have not handled input
-
 	bool handledInput = false;
 
-	// Clear received input flags from all grid objects
-	// This is used to make sure we never give input to the same object \
-	// multiple times per frame - needed if our objects move mid-frame.
 	for (int x = 0; x < GRID_SIZE_X; ++x)
 	{
 		for (int y = 0; y < GRID_SIZE_Y; ++y)
 		{
-			// We check for nullptr in case there is nothing in this grid slot!
+			// Checking if gridspot is empty
 			if (m_GridArray[x][y] != nullptr)
 			{
 				m_GridArray[x][y]->ClearReceivedInput();
@@ -69,16 +62,9 @@ bool Grid::input(const sf::Event& _event)
 	{
 		for (int y = 0; y < GRID_SIZE_Y; ++y)
 		{
-			// We check for nullptr in case there is nothing in this grid slot!
-			// We also check that this object hasn't already received input on this frame
-			// this is needed for objects that move around the grid during the input phase
+			// check that this object hasn't already received input on this frame
 			if (m_GridArray[x][y] != nullptr && !m_GridArray[x][y]->HasRececeivedInput())
 			{
-				// We set out handledInput to true IF we handled any input 
-				// just now OR if we handled input previously.
-				// NOTE: The order here is vital - if we put it in reverse order, 
-				// we would not bother handling input for this grid item if we had 
-				// previously handled it!
 				handledInput = m_GridArray[x][y]->input(_event) || handledInput;
 			}
 		}
@@ -97,7 +83,7 @@ void Grid::update(const float& _dtAsSeconds)
 	{
 		for (int y = 0; y < GRID_SIZE_Y; ++y)
 		{
-			// We check for nullptr in case there is nothing in this grid slot!
+			// check for nullptr incase of empty gridspot
 			if (m_GridArray[x][y] != nullptr)
 				m_GridArray[x][y]->update(_dtAsSeconds);
 			if (m_GridArray[x][y] != nullptr && m_GridArray[x][y]->HasKilledPlayer) {

@@ -8,19 +8,7 @@
 Player::Player(sf::Texture& _texture)
 	: GridSprite(_texture, GridObject::PLAYER)
 {
-	/*m_diamondsLeft = 0;
-	for (int x = 0; x < m_grid->GRID_SIZE_X; ++x)
-	{
-		for (int y = 0; y < m_grid->GRID_SIZE_Y; ++y)
-		{
-			GridObject* diamondCheck = m_grid->GetObject(x, y);
 
-			if (diamondCheck != nullptr && diamondCheck->GetType() == Type::DIAMOND) {
-				m_diamondsLeft++;
-			}
-
-		}
-	}*/
 }
 
 
@@ -62,14 +50,7 @@ bool Player::input(const sf::Event& _event)
 			// Get the object currently in our target Cell
 			GridObject* targetCellObject = m_grid->GetObject(targetX, targetY);
 
-			// TODO: perform special actions based on content of target cell
-			// (if boulder, push)
-			// (if boulder and can't push, don't move)
-			// (if diamond, collect)
-			// (if closed exit, don't move)
-			// (if open exit, go to next level)
-
-			// NOTE: This will automatically delete whatever GridObject is in the target cell!
+			// Handles the player moving into different gridobjects
 			if (targetCellObject == nullptr || targetCellObject->GetType() == GridObject::DIRT)
 				m_grid->MoveObject(m_gridX, m_gridY, targetX, targetY, true);
 			else if (targetCellObject != nullptr && targetCellObject->GetType() == GridObject::DIAMOND)
@@ -96,9 +77,6 @@ bool Player::input(const sf::Event& _event)
 				
 			}
 
-			
-
-			// Return true since we handled some input
 			return true;
 		}
 	}

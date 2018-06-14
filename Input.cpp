@@ -12,7 +12,7 @@ void Engine::input()
 
 		if (event.type == Event::KeyPressed)
 		{
-			// Handle quit
+			// Lets the player quit the game
 			if (event.key.code == Keyboard::Escape)
 			{
 				m_Window.close();

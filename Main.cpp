@@ -8,9 +8,7 @@ int main()
 	// declare an instance of Engine
 	Engine engine;
 
-	// Start the engine
+	// Run the engine
 	engine.run();
-
-	// Quit when engine is stopped
 	return 0;
 }
